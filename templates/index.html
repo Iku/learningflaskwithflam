@@ -1,27 +1,30 @@
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-<style>
-body {
-
-        background-image: url("{{ url_for('static', filename='background.png') }}");
-}
-#banner {
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 250px;
-}
-</style>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>uwu</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='indexstyle.css') }}">
 </head>
 <body>
-  <img id="banner" src="{{ url_for('static', filename='banner.png') }}" alt="Banner Image"/>
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <h1 style="text-align: center;"><span style="color: #333333;"><a style="color: #333333;" href="{{ url_for('index2') }}">CLICK HERE TO ENTER!</a></span></h1>
+ <div id="icons">
+ 	<a href="http://twitter.com/sleeplessneet"><img src="{{ url_for('static', filename='twitterlogo.png') }}" height="50px" width="50px"></img></a>
+ 	<a href="http://github.com/iku"><img src="{{ url_for('static', filename='githublogo.png') }}" height="45px" width="45px"></img></a>
+ 	<a href="http://discord.gg/baka"><img src="{{ url_for('static', filename='discordlogo.png') }}" height="45px" width="45px"></img></a>
+ </div>
+ <div id="fade">
+  <div class="top">
+   <div class="top-text">	
+	 <h1>(<span style="color: #e45678">๑</span>・ω・<span style="color: #e45678">๑</span>)</h1>
+   </div>
+  </div>
+ </div>
+ <div class="avatar">
+ 	<img class="pic" src="{{ url_for('static', filename='ava.png') }}" width="400" height="400">
+ </div>
+ <div class=nerd>
+ 	<p style="letter-spacing: 0.416667em;" data-shrink-original-size="24">Code | Music | Games</p>
+ <div>
+ 	<b><a style="text-decoration:none" href="mailto:nozomu@neko.li" id=bottom>nozomu@neko.li</a></b>
+ </div>
 </body>
+</html>
