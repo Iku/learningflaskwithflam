@@ -51,15 +51,7 @@ body {
 }
 
 
-a:link {
-    color: #e8e8e8;
-    font-family: "Lato";
-    font-size: 19px;
-    letter-spacing: 0.210526em;
-}
-
-
-a:visited {
+a {
     color: #e8e8e8;
     font-family: "Lato";
     font-size: 19px;
@@ -68,14 +60,4 @@ a:visited {
 
 a:hover {
     color: hotpink;
-    font-family: "Lato";
-    font-size: 19px;
-    letter-spacing: 0.210526em;
-}
-
-a:active {
-    color: #e8e8e8;
-    font-family: "Lato";
-    font-size: 19px;
-    letter-spacing: 0.210526em;
 }
