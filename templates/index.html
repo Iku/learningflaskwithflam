@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='indexstyle.css') }}">
 </head>
 <body>
+<div class="log">
+	<a  style="text-decoration:none" href="{{ url_for('logout') }}"> logout?</a>
+</div>
 <div id="icons">
 	 <a href="http://twitter.com/sleeplessneet"><img src="{{ url_for('static', filename='twitterlogo.png') }}" height="50px" width="50px"></img></a>
 	 <a href="http://github.com/iku"><img src="{{ url_for('static', filename='githublogo.png') }}" height="45px" width="45px"></img></a>
@@ -24,7 +27,7 @@
 <div class=nerd>
  	<p style="letter-spacing: 0.416667em;" data-shrink-original-size="24">Code | Music | Games</p>
 </div>
-<div>
+<div id="email">
  	<b><a style="text-decoration:none" href="mailto:nozomu@neko.li" id=bottom>nozomu@neko.li</a></b>
 </div>
 </body>
