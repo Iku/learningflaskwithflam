@@ -4,10 +4,9 @@ import os
 from sqlalchemy.orm import sessionmaker
 from tabledef import *
 import hashlib
-engine = create_engine('sqlite:///web.db', echo=True)
- 
-app = Flask(__name__)
 
+engine = create_engine('sqlite:///web.db', echo=True)
+app = Flask(__name__)
 salt = "l0ld0ngz"
 
 @app.route('/')
@@ -40,7 +39,6 @@ def do_admin_login():
 def newuser():
 	return render_template("register.html")
 
-
 @app.route('/register', methods=['POST'])
 def register():
 
@@ -70,8 +68,6 @@ def logout():
 @app.route('/injectweed')
 def injectweed():
 	return render_template("injectweed.html")
-
-
 
 if __name__ == "__main__":
 	app.secret_key = os.urandom(12)

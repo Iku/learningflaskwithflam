@@ -7,7 +7,6 @@ body {
 	background-image: url(indexbg.png)
 }
 
-
 .top-text {
 	color: white;
 	background-position: center;
@@ -49,7 +48,6 @@ body {
 	text-transform: lowercase;
 	padding-top: 1%;
 }
-
 
 a {
     color: #e8e8e8;
