@@ -90,3 +90,9 @@ a:hover {
     color: hotpink;
 }
 
+.flash {
+  color: #ff0000;
+  font-family: "Lato";
+  font-size: 19px;
+  padding-right: 30px;
+}

@@ -20,7 +20,7 @@ def home():
 @app.route('/login', methods=['POST'])
 def do_admin_login():
  
-    pword = str(request.form['username'] + salt)
+    pword = str(request.form['password'] + salt)
     salty = hashlib.md5(pword.encode())
     POST_USERNAME = str(request.form['username'])
     POST_PASSWORD = salty.hexdigest()
@@ -31,9 +31,11 @@ def do_admin_login():
     result = query.first()
     if result:
         session['logged_in'] = True
+        return home()
     else:
-        flash('wrong password!')
-    return home()
+        flash('Incorrect password or username')
+        return home()
+    
 
 @app.route('/newuser')
 def newuser():
@@ -42,7 +44,7 @@ def newuser():
 @app.route('/register', methods=['POST'])
 def register():
 
-    pword = str(request.form['username'] + salt)
+    pword = str(request.form['password'] + salt)
     salty = hashlib.md5(pword.encode())
     POST_USERNAME = str(request.form['username'])
     POST_PASSWORD = salty.hexdigest()
@@ -53,12 +55,14 @@ def register():
     result = query.first()
     if result:
         flash('This user already exists')
+        return newuser()
     else:
         user = User(POST_USERNAME, POST_PASSWORD)
         s.add(user)
         # commit the record the database
         s.commit()
-    return home()
+        return home()
+
 
 @app.route("/logout")
 def logout():

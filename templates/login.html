@@ -21,6 +21,15 @@
 				<label class="login-field-icon fui-lock" for="login-pass"></label>
 				</div>
                 <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block" >
+				{% with messages = get_flashed_messages() %}
+                    {% if messages %}
+            			<ul>
+               				{% for message in messages %}
+               				<p class="flash">{{ message }}</p>
+               				{% endfor %}
+            			</ul>
+         			{% endif %}
+      			{% endwith %}                
                 <br>
                 <a style="text-decoration:none" href='{{ url_for('newuser') }}'>need an account?</a>
 			    <br>
