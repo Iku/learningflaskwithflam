@@ -74,8 +74,10 @@ def add_user():
 
     Session = sessionmaker(bind=engine)
     s = Session()
+   
     username = str(request.json['username'])
     password = str(request.json['password'])
+    
     user = User(username, password)
 
     s.add(user)
