@@ -1,12 +1,13 @@
 from flask import Flask
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, flash, redirect, render_template, request, session, abort, jsonify
 import os
 from sqlalchemy.orm import sessionmaker
+from flask_sqlalchemy import SQLAlchemy
 from tabledef import *
 import hashlib
 
-engine = create_engine('sqlite:///web.db', echo=True)
 app = Flask(__name__)
+engine = create_engine('sqlite:///web.db', echo=True)
 salt = "l0ld0ngz"
 
 @app.route('/')
@@ -63,15 +64,25 @@ def register():
         s.commit()
         return home()
 
-
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
     return home()
 
-@app.route('/injectweed')
-def injectweed():
-	return render_template("injectweed.html")
+@app.route("/user", methods=["POST"])
+def add_user():
+
+    Session = sessionmaker(bind=engine)
+    s = Session()
+    username = str(request.json['username'])
+    password = str(request.json['password'])
+    user = User(username, password)
+
+    s.add(user)
+    s.commit()
+
+    return jsonify(user)
+
 
 if __name__ == "__main__":
 	app.secret_key = os.urandom(12)
