@@ -83,7 +83,7 @@ def add_user():
     s.add(user)
     s.commit()
 
-    return jsonify(user)
+    return user
 
 
 if __name__ == "__main__":
