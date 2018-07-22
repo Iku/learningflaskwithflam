@@ -5,10 +5,14 @@ from sqlalchemy.orm import sessionmaker
 from flask_sqlalchemy import SQLAlchemy
 from tabledef import *
 import hashlib
+from flask_marshmallow import Marshmallow
 
 app = Flask(__name__)
 engine = create_engine('sqlite:///web.db', echo=True)
 salt = "l0ld0ngz"
+ma = Marshmallow(app)
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
 
 @app.route('/')
 def home():
@@ -69,7 +73,7 @@ def logout():
     session['logged_in'] = False
     return home()
 
-@app.route("/user", methods=["POST"])
+@app.route("/api/user", methods=["POST"])
 def add_user():
 
     Session = sessionmaker(bind=engine)
@@ -85,6 +89,32 @@ def add_user():
 
     return user
 
+@app.route("/api/user", methods=["GET"])
+def get_user():
+    Session = sessionmaker(bind=engine)
+    s = Session()
+    all_users = s.query(User)
+    result = users_schema.dump(all_users)
+    return jsonify(result.data)
+
+@app.route("/api/user/<id>", methods=["GET"])
+def user_detail(id):
+    Session = sessionmaker(bind=engine)
+    s = Session()
+
+    user = s.query(User).filter(User.id == id)
+    return user_schema.jsonify(user)
+
+@app.route("/api/user/<id>", methods=["DELETE"])
+def user_delete(id):
+    id = text(id)
+    Session = sessionmaker(bind=engine)
+    s = Session()
+    user = s.query(User).filter(id)
+    s.delete(user)
+    s.session.commit()
+
+    return user_schema.jsonify(user)
 
 if __name__ == "__main__":
 	app.secret_key = os.urandom(12)
