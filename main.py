@@ -73,26 +73,7 @@ def logout():
     session['logged_in'] = False
     return home()
 
-@app.route("/api/user", methods=["POST"])
-@auth.login_required
-def add_user():
-
-    Session = sessionmaker(bind=engine)
-    s = Session()
-    pword = request.json['password'] + salt)
-    salty = hashlib.md5(pword.encode())
-    uname = request.json['username']
-    passw = salty.hexdigest()
-    
-    user = User(uname, passw)
-
-    s.add(user)
-    s.commit()
-
-    return "success"
-
 @app.route("/api/user", methods=["GET"])
-@auth.login_required
 def get_user():
     Session = sessionmaker(bind=engine)
     s = Session()
@@ -101,7 +82,6 @@ def get_user():
     return jsonify(result.data)
 
 @app.route("/api/user/<id>", methods=["GET"])
-@auth.login_required
 def user_detail(id):
     Session = sessionmaker(bind=engine)
     s = Session()
@@ -110,14 +90,13 @@ def user_detail(id):
     return user_schema.jsonify(user)
 
 @app.route("/api/user/<id>", methods=["DELETE"])
-@auth.login_required
 def user_delete(id):
     Session = sessionmaker(bind=engine)
     s = Session()
 
     user = s.query(User).filter(User.id == id).first()
     s.delete(user)
-    s.session.commit()
+    s.commit()
     return user_schema.jsonify(user)
 
 if __name__ == "__main__":
