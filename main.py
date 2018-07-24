@@ -79,15 +79,15 @@ def add_user():
     Session = sessionmaker(bind=engine)
     s = Session()
    
-    username = str(request.json['username'])
-    password = str(request.json['password'])
+    uname= str(request.json['username'])
+    pword = str(request.json['password'])
     
     user = User(username, password)
 
     s.add(user)
     s.commit()
 
-    return user
+    return "success"
 
 @app.route("/api/user", methods=["GET"])
 def get_user():
@@ -102,20 +102,19 @@ def user_detail(id):
     Session = sessionmaker(bind=engine)
     s = Session()
 
-    user = s.query(User).filter(User.id == id)
+    user = s.query(User).filter(User.id == id).first()
     return user_schema.jsonify(user)
 
 @app.route("/api/user/<id>", methods=["DELETE"])
 def user_delete(id):
-    id = text(id)
     Session = sessionmaker(bind=engine)
     s = Session()
-    user = s.query(User).filter(id)
+
+    user = s.query(User).filter(User.id == id).first()
     s.delete(user)
     s.session.commit()
 
-    return user_schema.jsonify(user)
-
+    return "success"
 if __name__ == "__main__":
 	app.secret_key = os.urandom(12)
 	app.run(debug=True)
